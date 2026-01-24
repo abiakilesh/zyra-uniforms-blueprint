@@ -12,6 +12,16 @@ import premium06 from "@/assets/products/premium-06.png";
 import premium07 from "@/assets/products/premium-07.png";
 import premium08 from "@/assets/products/premium-08.png";
 
+// Import Eco Earth images
+import eco01 from "@/assets/products/eco-01.png";
+import eco02 from "@/assets/products/eco-02.png";
+import eco03 from "@/assets/products/eco-03.png";
+import eco04 from "@/assets/products/eco-04.png";
+import eco05 from "@/assets/products/eco-05.png";
+import eco06 from "@/assets/products/eco-06.png";
+import eco07 from "@/assets/products/eco-07.png";
+import eco08 from "@/assets/products/eco-08.png";
+
 interface Product {
   id: number;
   name: string;
@@ -61,14 +71,14 @@ const categoryData: Record<string, CategoryData> = {
     description: "Sustainable and environmentally friendly uniform fabrics. Made with eco-conscious materials without compromising on quality.",
     catalogPdf: "/catalogs/eco-earth-mafatlal.pdf",
     products: [
-      { id: 1, name: "Natural Cotton Blend", image: "" },
-      { id: 2, name: "Organic Green Series", image: "" },
-      { id: 3, name: "Earth Brown Collection", image: "" },
-      { id: 4, name: "Bamboo Fiber Mix", image: "" },
-      { id: 5, name: "Recycled Navy Classic", image: "" },
-      { id: 6, name: "Hemp Blend Grey", image: "" },
-      { id: 7, name: "Sustainable White Pure", image: "" },
-      { id: 8, name: "Eco Blue Harmony", image: "" },
+      { id: 1, name: "Oxygen 1-8 Blue Collection", image: eco01 },
+      { id: 2, name: "Oxygen Blue Fabric", image: eco02 },
+      { id: 3, name: "Oxygen 9-16 Grey Collection", image: eco03 },
+      { id: 4, name: "Oxygen Grey Fabric", image: eco04 },
+      { id: 5, name: "Oxygen 17-24 Pink Collection", image: eco05 },
+      { id: 6, name: "Oxygen Pink Fabric", image: eco06 },
+      { id: 7, name: "Oxygen 25-32 Purple Collection", image: eco07 },
+      { id: 8, name: "Oxygen Purple Fabric", image: eco08 },
     ],
   },
   "vision-combination": {
