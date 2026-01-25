@@ -22,6 +22,16 @@ import eco06 from "@/assets/products/eco-06.png";
 import eco07 from "@/assets/products/eco-07.png";
 import eco08 from "@/assets/products/eco-08.png";
 
+// Import Other category images
+import other01 from "@/assets/products/other-01.png";
+import other02 from "@/assets/products/other-02.png";
+import other03 from "@/assets/products/other-03.png";
+import other04 from "@/assets/products/other-04.png";
+import other05 from "@/assets/products/other-05.png";
+import other06 from "@/assets/products/other-06.png";
+import other07 from "@/assets/products/other-07.png";
+import other08 from "@/assets/products/other-08.png";
+
 interface Product {
   id: number;
   name: string;
@@ -94,6 +104,21 @@ const categoryData: Record<string, CategoryData> = {
       { id: 6, name: "Smart Black Edition", image: "" },
       { id: 7, name: "Next Gen White", image: "" },
       { id: 8, name: "Vision Royal Collection", image: "" },
+    ],
+  },
+  "other": {
+    title: "Other Products",
+    description: "Explore our diverse collection of quality school uniforms featuring various styles, colors, and designs to meet your unique requirements.",
+    catalogPdf: "/catalogs/other-products.pdf",
+    products: [
+      { id: 1, name: "Navy & Sky Blue Sports Set", image: other01 },
+      { id: 2, name: "Green & Gold Polo Shirt", image: other02 },
+      { id: 3, name: "Neon Green Track Suit", image: other03 },
+      { id: 4, name: "Red Classic Uniform Set", image: other04 },
+      { id: 5, name: "Black & Grey Polo Set", image: other05 },
+      { id: 6, name: "Multi-Color Polo Collection", image: other06 },
+      { id: 7, name: "Red & Black Girls Uniform", image: other07 },
+      { id: 8, name: "Yellow & Blue Sports Set", image: other08 },
     ],
   },
 };
