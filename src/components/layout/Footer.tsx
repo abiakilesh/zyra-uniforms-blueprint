@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
 import logo from "@/assets/zyra-logo.png";
 
 const Footer = () => {
@@ -67,6 +67,11 @@ const Footer = () => {
                   Vision Combination
                 </Link>
               </li>
+              <li>
+                <Link to="/products/other" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+                  Other
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -98,10 +103,41 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-primary-foreground/20 mt-12 pt-8 text-center">
-          <p className="text-primary-foreground/60 text-sm">
-            © {new Date().getFullYear()} Zyra Uniforms. All rights reserved.
-          </p>
+        <div className="border-t border-primary-foreground/20 mt-12 pt-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-primary-foreground/60 text-sm">
+              © {new Date().getFullYear()} Zyra Uniforms. All rights reserved.
+            </p>
+            <div className="flex items-center gap-4">
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary-foreground/60 hover:text-primary-foreground transition-colors"
+                aria-label="Facebook"
+              >
+                <Facebook className="w-5 h-5" />
+              </a>
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary-foreground/60 hover:text-primary-foreground transition-colors"
+                aria-label="Instagram"
+              >
+                <Instagram className="w-5 h-5" />
+              </a>
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary-foreground/60 hover:text-primary-foreground transition-colors"
+                aria-label="Twitter"
+              >
+                <Twitter className="w-5 h-5" />
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
