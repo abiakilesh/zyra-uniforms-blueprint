@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Download, ArrowLeft, FileText } from "lucide-react";
 import Layout from "@/components/layout/Layout";
+import ImageLightbox from "@/components/ImageLightbox";
 
 // Import Premium Combination images
 import premium01 from "@/assets/products/premium-01.png";
@@ -21,6 +23,16 @@ import eco05 from "@/assets/products/eco-05.png";
 import eco06 from "@/assets/products/eco-06.png";
 import eco07 from "@/assets/products/eco-07.png";
 import eco08 from "@/assets/products/eco-08.png";
+
+// Import Happy Days images
+import happy01 from "@/assets/products/happy-01.png";
+import happy02 from "@/assets/products/happy-02.png";
+import happy03 from "@/assets/products/happy-03.png";
+import happy04 from "@/assets/products/happy-04.png";
+import happy05 from "@/assets/products/happy-05.png";
+import happy06 from "@/assets/products/happy-06.png";
+import happy07 from "@/assets/products/happy-07.png";
+import happy08 from "@/assets/products/happy-08.png";
 
 // Import Other category images
 import other01 from "@/assets/products/other-01.png";
@@ -66,14 +78,14 @@ const categoryData: Record<string, CategoryData> = {
     description: "Comfortable and colorful fabrics designed for everyday school wear. Easy to maintain and perfect for active students.",
     catalogPdf: "/catalogs/mafatlal-happy-days.pdf",
     products: [
-      { id: 1, name: "Sunshine Yellow Mix", image: "" },
-      { id: 2, name: "Ocean Blue Comfort", image: "" },
-      { id: 3, name: "Forest Green Fresh", image: "" },
-      { id: 4, name: "Cherry Red Vibrant", image: "" },
-      { id: 5, name: "Purple Dream", image: "" },
-      { id: 6, name: "Turquoise Breeze", image: "" },
-      { id: 7, name: "Coral Sunset", image: "" },
-      { id: 8, name: "Mint Fresh Collection", image: "" },
+      { id: 1, name: "Genius-12 | 800026 Collection", image: happy01 },
+      { id: 2, name: "Green & Navy School Set", image: happy02 },
+      { id: 3, name: "Blue & Navy Kids Set", image: happy03 },
+      { id: 4, name: "Blue Whale-4 | Zeal-2", image: happy04 },
+      { id: 5, name: "Blaze-5 | Memory-913", image: happy05 },
+      { id: 6, name: "Yellow & Grey Cricket Set", image: happy06 },
+      { id: 7, name: "Pink & Black Doctor Set", image: happy07 },
+      { id: 8, name: "Spark-10 | Ziba-1", image: happy08 },
     ],
   },
   "eco-earth": {
@@ -126,6 +138,16 @@ const categoryData: Record<string, CategoryData> = {
 const ProductCategory = () => {
   const { category } = useParams<{ category: string }>();
   const data = category ? categoryData[category] : null;
+  
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState({ src: "", alt: "" });
+
+  const openLightbox = (imageSrc: string, imageAlt: string) => {
+    if (imageSrc) {
+      setSelectedImage({ src: imageSrc, alt: imageAlt });
+      setLightboxOpen(true);
+    }
+  };
 
   if (!data) {
     return (
@@ -171,8 +193,9 @@ const ProductCategory = () => {
             {data.products.map((product, index) => (
               <div
                 key={product.id}
-                className="card-product overflow-hidden animate-fade-in"
+                className={`card-product overflow-hidden animate-fade-in ${product.image ? 'cursor-pointer hover:ring-2 hover:ring-primary/50 transition-all' : ''}`}
                 style={{ animationDelay: `${index * 50}ms` }}
+                onClick={() => openLightbox(product.image, product.name)}
               >
                 <div className="aspect-[4/3] bg-gradient-to-br from-secondary to-muted flex items-center justify-center overflow-hidden">
                   {product.image ? (
@@ -196,6 +219,9 @@ const ProductCategory = () => {
                   <h3 className="font-semibold text-lg text-foreground">
                     {product.name}
                   </h3>
+                  {product.image && (
+                    <p className="text-xs text-muted-foreground mt-1">Click to view full size</p>
+                  )}
                 </div>
               </div>
             ))}
@@ -247,6 +273,14 @@ const ProductCategory = () => {
           </a>
         </div>
       </section>
+
+      {/* Lightbox */}
+      <ImageLightbox
+        isOpen={lightboxOpen}
+        onClose={() => setLightboxOpen(false)}
+        imageSrc={selectedImage.src}
+        imageAlt={selectedImage.alt}
+      />
     </Layout>
   );
 };
