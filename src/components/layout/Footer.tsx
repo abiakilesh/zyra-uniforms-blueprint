@@ -110,7 +110,7 @@ const Footer = () => {
             </p>
             <div className="flex items-center gap-4">
               <a
-                href="https://facebook.com"
+                href="https://www.facebook.com/photo?fbid=122109059847197837&set=a.122097646749197837"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary-foreground/60 hover:text-primary-foreground transition-colors"
@@ -119,7 +119,7 @@ const Footer = () => {
                 <Facebook className="w-5 h-5" />
               </a>
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/p/DT2AkJLgaDf/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary-foreground/60 hover:text-primary-foreground transition-colors"
@@ -128,7 +128,7 @@ const Footer = () => {
                 <Instagram className="w-5 h-5" />
               </a>
               <a
-                href="https://twitter.com"
+                href="https://x.com/mylaimanjuvilas/status/2014593469302636844"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary-foreground/60 hover:text-primary-foreground transition-colors"
