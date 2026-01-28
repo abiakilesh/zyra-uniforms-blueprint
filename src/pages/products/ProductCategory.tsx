@@ -24,7 +24,7 @@ import eco06 from "@/assets/products/eco-06.png";
 import eco07 from "@/assets/products/eco-07.png";
 import eco08 from "@/assets/products/eco-08.png";
 
-// Import Happy Days images
+// Import Happy Days images (fabric)
 import happy01 from "@/assets/products/happy-01.png";
 import happy02 from "@/assets/products/happy-02.png";
 import happy03 from "@/assets/products/happy-03.png";
@@ -34,7 +34,13 @@ import happy06 from "@/assets/products/happy-06.png";
 import happy07 from "@/assets/products/happy-07.png";
 import happy08 from "@/assets/products/happy-08.png";
 
-// Import Other category images
+// Import Happy Days human model images
+import happyHuman01 from "@/assets/products/happy-human-01.png";
+import happyHuman02 from "@/assets/products/happy-human-02.png";
+import happyHuman03 from "@/assets/products/happy-human-03.png";
+import happyHuman04 from "@/assets/products/happy-human-04.png";
+
+// Import Sport Wear (formerly Other) category images
 import other01 from "@/assets/products/other-01.png";
 import other02 from "@/assets/products/other-02.png";
 import other03 from "@/assets/products/other-03.png";
@@ -48,6 +54,7 @@ interface Product {
   id: number;
   name: string;
   image: string;
+  humanImage?: string; // For products with human model images
 }
 
 interface CategoryData {
@@ -63,10 +70,10 @@ const categoryData: Record<string, CategoryData> = {
     description: "Our premium fabric combinations offer superior quality, exceptional comfort, and long-lasting durability. Perfect for schools that demand the finest uniforms.",
     catalogPdf: "/catalogs/mafatlal-premium-combinations.pdf",
     products: [
-      { id: 1, name: "Vision-01 | Sure Shot- SS194", image: premium01 },
-      { id: 2, name: "Vision-02 | Big Boss-512", image: premium02 },
-      { id: 3, name: "Vision-03 | Big Boss-5128", image: premium03 },
-      { id: 4, name: "Vision-04 | Sure Shot-306", image: premium04 },
+      { id: 1, name: "Taurus-6 | Memory-913", image: premium01 },
+      { id: 2, name: "Premium Chef & Hostess", image: premium02 },
+      { id: 3, name: "Bakooza-20 | 800025", image: premium03 },
+      { id: 4, name: "Premium Green Collection", image: premium04 },
       { id: 5, name: "Vision-05 | Big Boss-569", image: premium05 },
       { id: 6, name: "Vision-06 | Big Boss-5128", image: premium06 },
       { id: 7, name: "Vision-07 | Big Boss-525", image: premium07 },
@@ -78,10 +85,10 @@ const categoryData: Record<string, CategoryData> = {
     description: "Comfortable and colorful fabrics designed for everyday school wear. Easy to maintain and perfect for active students.",
     catalogPdf: "/catalogs/mafatlal-happy-days.pdf",
     products: [
-      { id: 1, name: "Genius-12 | 800026 Collection", image: happy01 },
-      { id: 2, name: "Green & Navy School Set", image: happy02 },
-      { id: 3, name: "Blue & Navy Kids Set", image: happy03 },
-      { id: 4, name: "Blue Whale-4 | Zeal-2", image: happy04 },
+      { id: 1, name: "Vision-14 | Sure Shot-310", image: happy01, humanImage: happyHuman01 },
+      { id: 2, name: "Vision-15 | Big Boss-5130", image: happy02, humanImage: happyHuman02 },
+      { id: 3, name: "Vision-18 | Big Boss-5129", image: happy03, humanImage: happyHuman03 },
+      { id: 4, name: "Vision-26 | Big Boss-579", image: happy04, humanImage: happyHuman04 },
       { id: 5, name: "Blaze-5 | Memory-913", image: happy05 },
       { id: 6, name: "Yellow & Grey Cricket Set", image: happy06 },
       { id: 7, name: "Pink & Black Doctor Set", image: happy07 },
@@ -118,9 +125,9 @@ const categoryData: Record<string, CategoryData> = {
       { id: 8, name: "Vision Royal Collection", image: "" },
     ],
   },
-  "other": {
-    title: "Other Products",
-    description: "Explore our diverse collection of quality school uniforms featuring various styles, colors, and designs to meet your unique requirements.",
+  "sport-wear": {
+    title: "Sport Wear",
+    description: "Explore our diverse collection of quality school sports uniforms featuring various styles, colors, and designs to meet your athletic requirements.",
     catalogPdf: "/catalogs/other-products.pdf",
     products: [
       { id: 1, name: "Navy & Sky Blue Sports Set", image: other01 },
@@ -135,17 +142,118 @@ const categoryData: Record<string, CategoryData> = {
   },
 };
 
+// Product card with optional human/fabric flip
+const ProductCard = ({ 
+  product, 
+  index, 
+  onImageClick 
+}: { 
+  product: Product; 
+  index: number; 
+  onImageClick: (imageSrc: string, imageAlt: string, images?: { src: string; alt: string }[]) => void;
+}) => {
+  const [showHuman, setShowHuman] = useState(!!product.humanImage);
+  const hasFlip = !!product.humanImage;
+
+  const currentImage = showHuman && product.humanImage ? product.humanImage : product.image;
+
+  const handleClick = () => {
+    if (!product.image) return;
+    
+    if (hasFlip) {
+      // For flip cards, pass both images for lightbox navigation
+      const images = [
+        { src: product.humanImage!, alt: `${product.name} - Model View` },
+        { src: product.image, alt: `${product.name} - Fabric View` },
+      ];
+      onImageClick(currentImage, showHuman ? `${product.name} - Model View` : `${product.name} - Fabric View`, images);
+    } else {
+      onImageClick(product.image, product.name);
+    }
+  };
+
+  return (
+    <div
+      className={`card-product overflow-hidden animate-fade-in group ${product.image ? 'cursor-pointer' : ''}`}
+      style={{ animationDelay: `${index * 50}ms` }}
+      onClick={handleClick}
+    >
+      <div className="aspect-[4/3] bg-gradient-to-br from-secondary to-muted flex items-center justify-center overflow-hidden relative">
+        {product.image ? (
+          <>
+            <img
+              src={currentImage}
+              alt={product.name}
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            />
+            {/* Zoom overlay on hover */}
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
+              <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm font-medium bg-black/50 px-3 py-1 rounded-full">
+                Click to view
+              </span>
+            </div>
+          </>
+        ) : (
+          <div className="text-center p-6">
+            <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+              <span className="text-2xl font-display font-bold text-primary">
+                {product.id}
+              </span>
+            </div>
+            <span className="text-muted-foreground text-sm">Product Image</span>
+          </div>
+        )}
+      </div>
+      <div className="p-5">
+        <h3 className="font-semibold text-lg text-foreground">
+          {product.name}
+        </h3>
+        {hasFlip && (
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setShowHuman(!showHuman);
+            }}
+            className="mt-2 text-xs text-primary hover:text-primary/80 transition-colors underline"
+          >
+            {showHuman ? "View Fabric" : "View Model"}
+          </button>
+        )}
+        {product.image && !hasFlip && (
+          <p className="text-xs text-muted-foreground mt-1">Click to view full size</p>
+        )}
+      </div>
+    </div>
+  );
+};
+
 const ProductCategory = () => {
   const { category } = useParams<{ category: string }>();
   const data = category ? categoryData[category] : null;
   
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState({ src: "", alt: "" });
+  const [lightboxImages, setLightboxImages] = useState<{ src: string; alt: string }[]>([]);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const openLightbox = (imageSrc: string, imageAlt: string) => {
+  const openLightbox = (imageSrc: string, imageAlt: string, images?: { src: string; alt: string }[]) => {
     if (imageSrc) {
       setSelectedImage({ src: imageSrc, alt: imageAlt });
+      if (images && images.length > 1) {
+        setLightboxImages(images);
+        setCurrentImageIndex(images.findIndex(img => img.src === imageSrc) || 0);
+      } else {
+        setLightboxImages([]);
+        setCurrentImageIndex(0);
+      }
       setLightboxOpen(true);
+    }
+  };
+
+  const handleNavigate = (index: number) => {
+    if (lightboxImages[index]) {
+      setCurrentImageIndex(index);
+      setSelectedImage(lightboxImages[index]);
     }
   };
 
@@ -183,47 +291,20 @@ const ProductCategory = () => {
         </div>
       </section>
 
-      {/* Products Grid - Images First */}
+      {/* Products Grid - 4 columns x 3 rows */}
       <section className="section-padding">
         <div className="container-custom">
           <h2 className="text-2xl font-display font-bold text-foreground mb-8 text-center">
             Our Collection
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {data.products.map((product, index) => (
-              <div
+              <ProductCard
                 key={product.id}
-                className={`card-product overflow-hidden animate-fade-in ${product.image ? 'cursor-pointer hover:ring-2 hover:ring-primary/50 transition-all' : ''}`}
-                style={{ animationDelay: `${index * 50}ms` }}
-                onClick={() => openLightbox(product.image, product.name)}
-              >
-                <div className="aspect-[4/3] bg-gradient-to-br from-secondary to-muted flex items-center justify-center overflow-hidden">
-                  {product.image ? (
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <div className="text-center p-6">
-                      <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
-                        <span className="text-2xl font-display font-bold text-primary">
-                          {product.id}
-                        </span>
-                      </div>
-                      <span className="text-muted-foreground text-sm">Product Image</span>
-                    </div>
-                  )}
-                </div>
-                <div className="p-5">
-                  <h3 className="font-semibold text-lg text-foreground">
-                    {product.name}
-                  </h3>
-                  {product.image && (
-                    <p className="text-xs text-muted-foreground mt-1">Click to view full size</p>
-                  )}
-                </div>
-              </div>
+                product={product}
+                index={index}
+                onImageClick={openLightbox}
+              />
             ))}
           </div>
         </div>
@@ -274,12 +355,15 @@ const ProductCategory = () => {
         </div>
       </section>
 
-      {/* Lightbox */}
+      {/* Lightbox with slide navigation */}
       <ImageLightbox
         isOpen={lightboxOpen}
         onClose={() => setLightboxOpen(false)}
         imageSrc={selectedImage.src}
         imageAlt={selectedImage.alt}
+        images={lightboxImages}
+        currentIndex={currentImageIndex}
+        onNavigate={handleNavigate}
       />
     </Layout>
   );

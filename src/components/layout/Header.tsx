@@ -8,7 +8,7 @@ const productCategories = [
   { name: "Mafatlal Happy Days", path: "/products/happy-days" },
   { name: "Eco Earth Mafatlal", path: "/products/eco-earth" },
   { name: "Mafatlal Vision Combination", path: "/products/vision-combination" },
-  { name: "Other", path: "/products/other" },
+  { name: "Sport Wear", path: "/products/sport-wear" },
 ];
 
 const Header = () => {
