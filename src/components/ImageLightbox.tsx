@@ -124,7 +124,7 @@ const ImageLightbox = ({
             handleNext();
           }}
           disabled={!canGoNext}
-          className={`absolute right-16 top-1/2 -translate-y-1/2 z-20 p-4 rounded-full bg-black/60 border-2 border-white/40 hover:bg-black/80 hover:border-white/60 transition-all shadow-lg ${
+          className={`absolute right-4 top-1/2 -translate-y-1/2 z-20 p-4 rounded-full bg-black/60 border-2 border-white/40 hover:bg-black/80 hover:border-white/60 transition-all shadow-lg ${
             !canGoNext ? 'opacity-30 cursor-not-allowed' : 'opacity-100'
           }`}
           aria-label="Next image"
