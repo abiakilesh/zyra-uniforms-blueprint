@@ -100,27 +100,33 @@ const ImageLightbox = ({
         <X className="w-6 h-6 text-white" />
       </button>
 
-      {/* Navigation Arrows */}
-      {hasMultipleImages && canGoPrev && (
+      {/* Navigation Arrows - Always visible when multiple images */}
+      {hasMultipleImages && (
         <button
           onClick={(e) => {
             e.stopPropagation();
             handlePrev();
           }}
-          className="absolute left-4 z-10 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+          disabled={!canGoPrev}
+          className={`absolute left-4 top-1/2 -translate-y-1/2 z-20 p-4 rounded-full bg-black/60 border-2 border-white/40 hover:bg-black/80 hover:border-white/60 transition-all shadow-lg ${
+            !canGoPrev ? 'opacity-30 cursor-not-allowed' : 'opacity-100'
+          }`}
           aria-label="Previous image"
         >
           <ChevronLeft className="w-8 h-8 text-white" />
         </button>
       )}
 
-      {hasMultipleImages && canGoNext && (
+      {hasMultipleImages && (
         <button
           onClick={(e) => {
             e.stopPropagation();
             handleNext();
           }}
-          className="absolute right-4 z-10 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+          disabled={!canGoNext}
+          className={`absolute right-16 top-1/2 -translate-y-1/2 z-20 p-4 rounded-full bg-black/60 border-2 border-white/40 hover:bg-black/80 hover:border-white/60 transition-all shadow-lg ${
+            !canGoNext ? 'opacity-30 cursor-not-allowed' : 'opacity-100'
+          }`}
           aria-label="Next image"
         >
           <ChevronRight className="w-8 h-8 text-white" />
