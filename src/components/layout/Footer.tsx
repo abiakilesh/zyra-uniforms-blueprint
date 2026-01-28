@@ -105,9 +105,13 @@ const Footer = () => {
 
         <div className="border-t border-primary-foreground/20 mt-12 pt-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-primary-foreground/60 text-sm">
-              © {new Date().getFullYear()} Zyra Uniforms. All rights reserved.
-            </p>
+            {/* Logo in footer bottom */}
+            <div className="flex items-center gap-4">
+              <img src={logo} alt="Zyra Uniforms" className="h-10 brightness-0 invert" />
+              <p className="text-primary-foreground/60 text-sm">
+                © {new Date().getFullYear()} Zyra Uniforms. All rights reserved.
+              </p>
+            </div>
             <div className="flex items-center gap-4">
               <a
                 href="https://www.facebook.com/photo?fbid=122109059847197837&set=a.122097646749197837"
