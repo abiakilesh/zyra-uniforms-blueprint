@@ -1,7 +1,7 @@
 const WhatsAppButton = () => {
   return (
     <a
-      href="https://wa.me/918807913062?text=Hello! I'm interested in Zyra Uniforms products."
+      href="https://web.whatsapp.com/send?phone=918807913062&text=Hello!%20I'm%20interested%20in%20Zyra%20Uniforms%20products."
       target="_blank"
       rel="noopener noreferrer"
       className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 animate-float"
