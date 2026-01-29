@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="space-y-4">
-            <img src={logo} alt="Zyra Uniforms" className="h-12 brightness-0 invert" />
+            <img src={logo} alt="Zyra Uniforms" className="h-12" />
             <p className="text-primary-foreground/80 text-sm leading-relaxed">
               Premium school uniform supplier in Tiruppur, Tamil Nadu. 
               Quality fabrics, trusted by schools across the region.
