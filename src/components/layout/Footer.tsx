@@ -107,7 +107,7 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             {/* Logo in footer bottom */}
             <div className="flex items-center gap-4">
-              <img src={logo} alt="Zyra Uniforms" className="h-10 brightness-0 invert" />
+              <img src={logo} alt="Zyra Uniforms" className="h-10" />
               <p className="text-primary-foreground/60 text-sm">
                 © {new Date().getFullYear()} Zyra Uniforms. All rights reserved.
               </p>
