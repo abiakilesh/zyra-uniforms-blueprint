@@ -291,13 +291,13 @@ const ProductCategory = () => {
         </div>
       </section>
 
-      {/* Products Grid - 4 columns x 3 rows */}
+      {/* Products Grid - 3 columns x 3 rows */}
       <section className="section-padding">
         <div className="container-custom">
           <h2 className="text-2xl font-display font-bold text-foreground mb-8 text-center">
             Our Collection
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {data.products.map((product, index) => (
               <ProductCard
                 key={product.id}
