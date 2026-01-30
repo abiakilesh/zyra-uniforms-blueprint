@@ -3,7 +3,12 @@ import gayathriVidhya from "@/assets/clients/gayathri-vidhya.png";
 import thaiMatriculation from "@/assets/clients/thai-matriculation.png";
 import littleKites from "@/assets/clients/little-kites.png";
 import gayathriCentral from "@/assets/clients/gayathri-central.png";
-import goodSam from "@/assets/clients/good-sam.png";
+import goodSam from "@/assets/clients/good-sam-new.jpeg";
+import cnmNdParekh from "@/assets/clients/cnm-nd-parekh.jpeg";
+import nammhss from "@/assets/clients/nammhss.jpeg";
+import sriSakthiVinayagar from "@/assets/clients/sri-sakthi-vinayagar.jpeg";
+import hayagrivas from "@/assets/clients/hayagrivas.jpeg";
+import akalVilakku from "@/assets/clients/akal-vilakku.jpeg";
 
 const clients = [
   {
@@ -30,6 +35,31 @@ const clients = [
     name: "Good Sam School",
     location: "Tamil Nadu",
     logo: goodSam,
+  },
+  {
+    name: "C.N.M. & N.D. Parekh ICSE School",
+    location: "SVKM's",
+    logo: cnmNdParekh,
+  },
+  {
+    name: "Nagamani Ammal Memorial Matriculation Hr. Sec. School",
+    location: "Cumbum",
+    logo: nammhss,
+  },
+  {
+    name: "Sri Sakthi Vinayagar Math. S.C. Sel. School",
+    location: "Cumbum",
+    logo: sriSakthiVinayagar,
+  },
+  {
+    name: "Hayagrivas International School (CBSE)",
+    location: "Tamil Nadu",
+    logo: hayagrivas,
+  },
+  {
+    name: "Akal Vilakku Educational Trust",
+    location: "Musiri",
+    logo: akalVilakku,
   },
 ];
 
