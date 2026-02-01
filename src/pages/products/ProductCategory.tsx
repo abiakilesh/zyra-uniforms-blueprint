@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { Download, ArrowLeft, FileText, ChevronLeft, ChevronRight } from "lucide-react";
+import { Download, ArrowLeft, FileText } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import ImageLightbox from "@/components/ImageLightbox";
+import Autoplay from "embla-carousel-autoplay";
 import {
   Carousel,
   CarouselContent,
@@ -47,7 +48,7 @@ import happyHuman02 from "@/assets/products/happy-human-02.png";
 import happyHuman03 from "@/assets/products/happy-human-03.png";
 import happyHuman04 from "@/assets/products/happy-human-04.png";
 
-// Import Vision Combination images
+// Import Vision Combination images (uniform only)
 import vision01 from "@/assets/products/vision-01.png";
 import vision02 from "@/assets/products/vision-02.png";
 import vision03 from "@/assets/products/vision-03.png";
@@ -58,7 +59,7 @@ import vision07 from "@/assets/products/vision-07.png";
 import vision09 from "@/assets/products/vision-09.png";
 import vision10 from "@/assets/products/vision-10.png";
 
-// Import Vision Combination Slide images
+// Import Vision Combination Slide images (fabric)
 import visionSlide01 from "@/assets/products/vision-slide-01.png";
 import visionSlide02 from "@/assets/products/vision-slide-02.png";
 import visionSlide03 from "@/assets/products/vision-slide-03.png";
@@ -70,18 +71,80 @@ import visionSlide08 from "@/assets/products/vision-slide-08.png";
 import visionSlide09 from "@/assets/products/vision-slide-09.png";
 import visionSlide10 from "@/assets/products/vision-slide-10.png";
 
-// Vision slider images array
+// Import Vision Human + Fabric combined images
+import visionHf01 from "@/assets/products/vision-hf-01.png";
+import visionHf02 from "@/assets/products/vision-hf-02.png";
+import visionHf03 from "@/assets/products/vision-hf-03.png";
+import visionHf04 from "@/assets/products/vision-hf-04.png";
+import visionHf05 from "@/assets/products/vision-hf-05.png";
+import visionHf06 from "@/assets/products/vision-hf-06.png";
+import visionHf07 from "@/assets/products/vision-hf-07.png";
+import visionHf08 from "@/assets/products/vision-hf-08.png";
+import visionHf09 from "@/assets/products/vision-hf-09.png";
+import visionHf10 from "@/assets/products/vision-hf-10.png";
+
+// Vision slider images array with uniform, fabric, and combined views
 const visionSlideImages = [
-  { src: visionSlide01, alt: "Vision Uniform 1" },
-  { src: visionSlide02, alt: "Vision Uniform 2" },
-  { src: visionSlide03, alt: "Vision Uniform 3" },
-  { src: visionSlide04, alt: "Vision Uniform 4" },
-  { src: visionSlide05, alt: "Vision Uniform 5" },
-  { src: visionSlide06, alt: "Vision Uniform 6" },
-  { src: visionSlide07, alt: "Vision Uniform 7" },
-  { src: visionSlide08, alt: "Vision Uniform 8" },
-  { src: visionSlide09, alt: "Vision Uniform 9" },
-  { src: visionSlide10, alt: "Vision Uniform 10" },
+  { 
+    uniform: vision01, 
+    fabric: visionSlide01, 
+    combined: visionHf01, 
+    alt: "Vision-01 | Sure Shot-SS194" 
+  },
+  { 
+    uniform: vision02, 
+    fabric: visionSlide02, 
+    combined: visionHf02, 
+    alt: "Vision-02 | Big Boss-512" 
+  },
+  { 
+    uniform: vision03, 
+    fabric: visionSlide03, 
+    combined: visionHf03, 
+    alt: "Vision-03 | Big Boss-5128" 
+  },
+  { 
+    uniform: vision04, 
+    fabric: visionSlide04, 
+    combined: visionHf04, 
+    alt: "Vision-04 | Sure Shot-306" 
+  },
+  { 
+    uniform: vision05, 
+    fabric: visionSlide05, 
+    combined: visionHf05, 
+    alt: "Vision-05 | Big Boss-569" 
+  },
+  { 
+    uniform: vision06, 
+    fabric: visionSlide06, 
+    combined: visionHf06, 
+    alt: "Vision-06 | Big Boss-5128" 
+  },
+  { 
+    uniform: vision07, 
+    fabric: visionSlide07, 
+    combined: visionHf07, 
+    alt: "Vision-07 | Big Boss-525" 
+  },
+  { 
+    uniform: visionSlide08, 
+    fabric: visionSlide08, 
+    combined: visionHf08, 
+    alt: "Vision-08 | Big Boss-5111" 
+  },
+  { 
+    uniform: vision09, 
+    fabric: visionSlide09, 
+    combined: visionHf09, 
+    alt: "Vision-09 | Big Boss-567" 
+  },
+  { 
+    uniform: vision10, 
+    fabric: visionSlide10, 
+    combined: visionHf10, 
+    alt: "Vision-10 | Big Boss-5128" 
+  },
 ];
 
 // Import Sport Wear (formerly Other) category images
@@ -187,6 +250,83 @@ const categoryData: Record<string, CategoryData> = {
   },
 };
 
+// Vision Slide Card with toggle between uniform, fabric, and combined
+type VisionViewType = "uniform" | "fabric" | "combined";
+
+const VisionSlideCard = ({ 
+  image, 
+  index,
+  onImageClick 
+}: { 
+  image: typeof visionSlideImages[0]; 
+  index: number;
+  onImageClick: (imageSrc: string, imageAlt: string, images?: { src: string; alt: string }[]) => void;
+}) => {
+  const [currentView, setCurrentView] = useState<VisionViewType>("uniform");
+  
+  const viewLabels: Record<VisionViewType, string> = {
+    uniform: "Uniform",
+    fabric: "Fabric",
+    combined: "Uniform & Fabric"
+  };
+  
+  const views: VisionViewType[] = ["uniform", "fabric", "combined"];
+  
+  const getCurrentImage = () => {
+    switch (currentView) {
+      case "uniform": return image.uniform;
+      case "fabric": return image.fabric;
+      case "combined": return image.combined;
+    }
+  };
+
+  const handleClick = () => {
+    const images = [
+      { src: image.uniform, alt: `${image.alt} - Uniform` },
+      { src: image.fabric, alt: `${image.alt} - Fabric` },
+      { src: image.combined, alt: `${image.alt} - Uniform & Fabric` },
+    ];
+    const currentIdx = views.indexOf(currentView);
+    onImageClick(getCurrentImage(), `${image.alt} - ${viewLabels[currentView]}`, images);
+  };
+
+  const cycleView = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const currentIdx = views.indexOf(currentView);
+    const nextIdx = (currentIdx + 1) % views.length;
+    setCurrentView(views[nextIdx]);
+  };
+
+  return (
+    <div 
+      className="bg-white rounded-xl shadow-lg overflow-hidden group cursor-pointer"
+      onClick={handleClick}
+    >
+      <div className="aspect-[3/4] overflow-hidden relative">
+        <img
+          src={getCurrentImage()}
+          alt={`${image.alt} - ${viewLabels[currentView]}`}
+          className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
+        />
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
+          <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm font-medium bg-black/50 px-3 py-1 rounded-full">
+            Click to view
+          </span>
+        </div>
+      </div>
+      <div className="p-3">
+        <p className="text-sm font-medium text-foreground truncate mb-2">{image.alt}</p>
+        <button
+          onClick={cycleView}
+          className="w-full text-xs bg-primary/10 hover:bg-primary/20 text-primary px-3 py-2 rounded-lg transition-colors font-medium"
+        >
+          View: {viewLabels[currentView]} →
+        </button>
+      </div>
+    </div>
+  );
+};
+
 // Product card with optional human/fabric flip
 const ProductCard = ({ 
   product, 
@@ -281,6 +421,11 @@ const ProductCategory = () => {
   const [lightboxImages, setLightboxImages] = useState<{ src: string; alt: string }[]>([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
+  // Autoplay plugin for carousel
+  const autoplayPlugin = useRef(
+    Autoplay({ delay: 3000, stopOnInteraction: true })
+  );
+
   const openLightbox = (imageSrc: string, imageAlt: string, images?: { src: string; alt: string }[]) => {
     if (imageSrc) {
       setSelectedImage({ src: imageSrc, alt: imageAlt });
@@ -340,32 +485,31 @@ const ProductCategory = () => {
       {category === "vision-combination" && (
         <section className="section-padding bg-secondary">
           <div className="container-custom">
-            <h2 className="text-2xl font-display font-bold text-foreground mb-8 text-center">
+            <h2 className="text-2xl font-display font-bold text-foreground mb-4 text-center">
               Uniform Showcase
             </h2>
+            <p className="text-center text-muted-foreground mb-8">
+              Click the button below each item to toggle between Uniform, Fabric, and Combined views
+            </p>
             <div className="max-w-4xl mx-auto">
               <Carousel
                 opts={{
                   align: "start",
                   loop: true,
                 }}
+                plugins={[autoplayPlugin.current]}
                 className="w-full"
+                onMouseEnter={autoplayPlugin.current.stop}
+                onMouseLeave={autoplayPlugin.current.reset}
               >
                 <CarouselContent className="-ml-2 md:-ml-4">
                   {visionSlideImages.map((image, index) => (
                     <CarouselItem key={index} className="pl-2 md:pl-4 basis-full md:basis-1/2 lg:basis-1/3">
-                      <div 
-                        className="bg-white rounded-xl shadow-lg overflow-hidden group cursor-pointer"
-                        onClick={() => openLightbox(image.src, image.alt, visionSlideImages)}
-                      >
-                        <div className="aspect-[3/4] overflow-hidden">
-                          <img
-                            src={image.src}
-                            alt={image.alt}
-                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                          />
-                        </div>
-                      </div>
+                      <VisionSlideCard 
+                        image={image} 
+                        index={index}
+                        onImageClick={openLightbox}
+                      />
                     </CarouselItem>
                   ))}
                 </CarouselContent>
@@ -422,26 +566,24 @@ const ProductCategory = () => {
       </section>
 
       {/* CTA */}
-      <section className="section-padding bg-primary">
+      <section className="section-padding bg-accent text-accent-foreground">
         <div className="container-custom text-center">
-          <h2 className="text-3xl font-display font-bold text-primary-foreground mb-4">
-            Interested in These Products?
+          <h2 className="text-3xl font-display font-bold mb-4">
+            Interested in Our Products?
           </h2>
-          <p className="text-xl text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
-            Contact us for pricing, bulk orders, or custom requirements.
+          <p className="text-xl mb-8 opacity-90">
+            Contact us for bulk orders, custom requirements, and best pricing
           </p>
-          <a
-            href={`https://wa.me/918807913062?text=Hello! I'm interested in the ${data.title} products.`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-whatsapp inline-flex items-center gap-2"
+          <Link
+            to="/contact"
+            className="bg-background text-foreground hover:bg-background/90 font-semibold px-8 py-4 rounded-lg transition-colors inline-block"
           >
-            Get Quote on WhatsApp
-          </a>
+            Get in Touch
+          </Link>
         </div>
       </section>
 
-      {/* Lightbox with slide navigation */}
+      {/* Lightbox */}
       <ImageLightbox
         isOpen={lightboxOpen}
         onClose={() => setLightboxOpen(false)}
