@@ -40,6 +40,17 @@ import happyHuman02 from "@/assets/products/happy-human-02.png";
 import happyHuman03 from "@/assets/products/happy-human-03.png";
 import happyHuman04 from "@/assets/products/happy-human-04.png";
 
+// Import Vision Combination images
+import vision01 from "@/assets/products/vision-01.png";
+import vision02 from "@/assets/products/vision-02.png";
+import vision03 from "@/assets/products/vision-03.png";
+import vision04 from "@/assets/products/vision-04.png";
+import vision05 from "@/assets/products/vision-05.png";
+import vision06 from "@/assets/products/vision-06.png";
+import vision07 from "@/assets/products/vision-07.png";
+import vision09 from "@/assets/products/vision-09.png";
+import vision10 from "@/assets/products/vision-10.png";
+
 // Import Sport Wear (formerly Other) category images
 import other01 from "@/assets/products/other-01.png";
 import other02 from "@/assets/products/other-02.png";
@@ -115,14 +126,15 @@ const categoryData: Record<string, CategoryData> = {
     description: "Modern and contemporary fabric combinations for the new age schools. Innovative designs meeting today's requirements.",
     catalogPdf: "/catalogs/mafatlal-premium-combinations.pdf",
     products: [
-      { id: 1, name: "Modern Navy Vision", image: "" },
-      { id: 2, name: "Contemporary Grey", image: "" },
-      { id: 3, name: "Future Blue Series", image: "" },
-      { id: 4, name: "Tech Green Innovation", image: "" },
-      { id: 5, name: "Digital Maroon", image: "" },
-      { id: 6, name: "Smart Black Edition", image: "" },
-      { id: 7, name: "Next Gen White", image: "" },
-      { id: 8, name: "Vision Royal Collection", image: "" },
+      { id: 1, name: "Vision-01 | Sure Shot-SS194", image: vision01 },
+      { id: 2, name: "Vision-02 | Big Boss-512", image: vision02 },
+      { id: 3, name: "Vision-03 | Big Boss-5128", image: vision03 },
+      { id: 4, name: "Vision-04 | Sure Shot-306", image: vision04 },
+      { id: 5, name: "Vision-05 | Big Boss-569", image: vision05 },
+      { id: 6, name: "Vision-06 | Big Boss-5128", image: vision06 },
+      { id: 7, name: "Vision-07 | Big Boss-525", image: vision07 },
+      { id: 8, name: "Vision-09 | Big Boss-567", image: vision09 },
+      { id: 9, name: "Vision-10 | Big Boss-5128", image: vision10 },
     ],
   },
   "sport-wear": {
