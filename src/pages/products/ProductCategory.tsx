@@ -1,8 +1,15 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { Download, ArrowLeft, FileText } from "lucide-react";
+import { Download, ArrowLeft, FileText, ChevronLeft, ChevronRight } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import ImageLightbox from "@/components/ImageLightbox";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 // Import Premium Combination images
 import premium01 from "@/assets/products/premium-01.png";
@@ -50,6 +57,32 @@ import vision06 from "@/assets/products/vision-06.png";
 import vision07 from "@/assets/products/vision-07.png";
 import vision09 from "@/assets/products/vision-09.png";
 import vision10 from "@/assets/products/vision-10.png";
+
+// Import Vision Combination Slide images
+import visionSlide01 from "@/assets/products/vision-slide-01.png";
+import visionSlide02 from "@/assets/products/vision-slide-02.png";
+import visionSlide03 from "@/assets/products/vision-slide-03.png";
+import visionSlide04 from "@/assets/products/vision-slide-04.png";
+import visionSlide05 from "@/assets/products/vision-slide-05.png";
+import visionSlide06 from "@/assets/products/vision-slide-06.png";
+import visionSlide07 from "@/assets/products/vision-slide-07.png";
+import visionSlide08 from "@/assets/products/vision-slide-08.png";
+import visionSlide09 from "@/assets/products/vision-slide-09.png";
+import visionSlide10 from "@/assets/products/vision-slide-10.png";
+
+// Vision slider images array
+const visionSlideImages = [
+  { src: visionSlide01, alt: "Vision Uniform 1" },
+  { src: visionSlide02, alt: "Vision Uniform 2" },
+  { src: visionSlide03, alt: "Vision Uniform 3" },
+  { src: visionSlide04, alt: "Vision Uniform 4" },
+  { src: visionSlide05, alt: "Vision Uniform 5" },
+  { src: visionSlide06, alt: "Vision Uniform 6" },
+  { src: visionSlide07, alt: "Vision Uniform 7" },
+  { src: visionSlide08, alt: "Vision Uniform 8" },
+  { src: visionSlide09, alt: "Vision Uniform 9" },
+  { src: visionSlide10, alt: "Vision Uniform 10" },
+];
 
 // Import Sport Wear (formerly Other) category images
 import other01 from "@/assets/products/other-01.png";
@@ -302,6 +335,47 @@ const ProductCategory = () => {
           </p>
         </div>
       </section>
+
+      {/* Vision Combination Slider - Only show for vision-combination category */}
+      {category === "vision-combination" && (
+        <section className="section-padding bg-secondary">
+          <div className="container-custom">
+            <h2 className="text-2xl font-display font-bold text-foreground mb-8 text-center">
+              Uniform Showcase
+            </h2>
+            <div className="max-w-4xl mx-auto">
+              <Carousel
+                opts={{
+                  align: "start",
+                  loop: true,
+                }}
+                className="w-full"
+              >
+                <CarouselContent className="-ml-2 md:-ml-4">
+                  {visionSlideImages.map((image, index) => (
+                    <CarouselItem key={index} className="pl-2 md:pl-4 basis-full md:basis-1/2 lg:basis-1/3">
+                      <div 
+                        className="bg-white rounded-xl shadow-lg overflow-hidden group cursor-pointer"
+                        onClick={() => openLightbox(image.src, image.alt, visionSlideImages)}
+                      >
+                        <div className="aspect-[3/4] overflow-hidden">
+                          <img
+                            src={image.src}
+                            alt={image.alt}
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                          />
+                        </div>
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious className="hidden md:flex -left-12" />
+                <CarouselNext className="hidden md:flex -right-12" />
+              </Carousel>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Products Grid - 3 columns x 3 rows */}
       <section className="section-padding">
