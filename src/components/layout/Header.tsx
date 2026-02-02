@@ -9,6 +9,8 @@ const productCategories = [
   { name: "Eco Earth Mafatlal", path: "/products/eco-earth" },
   { name: "Mafatlal Vision Combination", path: "/products/vision-combination" },
   { name: "Sport Wear", path: "/products/sport-wear" },
+  { name: "Hospitality", path: "/products/hospitality" },
+  { name: "Other Products", path: "/products/other-products" },
 ];
 
 const Header = () => {

@@ -157,6 +157,17 @@ import other06 from "@/assets/products/other-06.png";
 import other07 from "@/assets/products/other-07.png";
 import other08 from "@/assets/products/other-08.png";
 
+// Import Hospitality/Other Products images
+import hosp01 from "@/assets/products/hosp-01.png";
+import hosp02 from "@/assets/products/hosp-02.png";
+import hosp03 from "@/assets/products/hosp-03.png";
+import hosp04 from "@/assets/products/hosp-04.png";
+import hosp05 from "@/assets/products/hosp-05.png";
+import hosp06 from "@/assets/products/hosp-06.png";
+import hosp07 from "@/assets/products/hosp-07.png";
+import hosp08 from "@/assets/products/hosp-08.png";
+import hosp09 from "@/assets/products/hosp-09.png";
+
 interface Product {
   id: number;
   name: string;
@@ -246,6 +257,35 @@ const categoryData: Record<string, CategoryData> = {
       { id: 6, name: "Multi-Color Polo Collection", image: other06 },
       { id: 7, name: "Red & Black Girls Uniform", image: other07 },
       { id: 8, name: "Yellow & Blue Sports Set", image: other08 },
+    ],
+  },
+  "hospitality": {
+    title: "Hospitality",
+    description: "Professional uniforms for the hospitality industry including hotels, restaurants, and corporate settings. Elegant designs with premium comfort.",
+    catalogPdf: "/catalogs/other-products.pdf",
+    products: [
+      { id: 1, name: "Chef White Uniform", image: hosp04 },
+      { id: 2, name: "Chef Black Uniform", image: hosp04 },
+      { id: 3, name: "Kitchen Apron Set", image: hosp05 },
+      { id: 4, name: "Hotel Staff Uniform - Olive", image: hosp06 },
+      { id: 5, name: "Formal Bandhgala - Navy", image: hosp07 },
+      { id: 6, name: "Formal Bandhgala - Charcoal", image: hosp08 },
+      { id: 7, name: "Executive Suit - Black", image: hosp09 },
+    ],
+  },
+  "other-products": {
+    title: "Other Products",
+    description: "Specialized uniforms for industrial, security, and professional sectors. Durable and functional designs for demanding work environments.",
+    catalogPdf: "/catalogs/other-products.pdf",
+    products: [
+      { id: 1, name: "Industrial Workwear - Navy Red", image: hosp01 },
+      { id: 2, name: "Safety High-Vis Coverall", image: hosp02 },
+      { id: 3, name: "Security Uniform Set", image: hosp03 },
+      { id: 4, name: "Chef White Uniform", image: hosp04 },
+      { id: 5, name: "Kitchen Apron Set", image: hosp05 },
+      { id: 6, name: "Hotel Staff Uniform", image: hosp06 },
+      { id: 7, name: "Formal Bandhgala - Navy", image: hosp07 },
+      { id: 8, name: "Executive Suit - Black", image: hosp09 },
     ],
   },
 };
@@ -369,12 +409,12 @@ const ProductCard = ({
             <img
               src={currentImage}
               alt={product.name}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              className="w-full h-full object-cover transition-all duration-500 ease-out group-hover:scale-110 group-active:scale-95"
             />
-            {/* Zoom overlay on hover */}
-            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
-              <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm font-medium bg-black/50 px-3 py-1 rounded-full">
-                Click to view
+            {/* Enhanced zoom overlay on hover */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
+              <span className="text-white scale-90 group-hover:scale-100 opacity-0 group-hover:opacity-100 transition-all duration-300 text-sm font-medium bg-black/60 px-4 py-2 rounded-full backdrop-blur-sm">
+                🔍 Click to zoom
               </span>
             </div>
           </>
