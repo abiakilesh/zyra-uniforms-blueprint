@@ -1,16 +1,8 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Download, ArrowLeft, FileText } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import ImageLightbox from "@/components/ImageLightbox";
-import Autoplay from "embla-carousel-autoplay";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
 
 // Import Premium Combination images
 import premium01 from "@/assets/products/premium-01.png";
@@ -83,69 +75,6 @@ import visionHf08 from "@/assets/products/vision-hf-08.png";
 import visionHf09 from "@/assets/products/vision-hf-09.png";
 import visionHf10 from "@/assets/products/vision-hf-10.png";
 
-// Vision slider images array with uniform, fabric, and combined views
-const visionSlideImages = [
-  { 
-    uniform: vision01, 
-    fabric: visionSlide01, 
-    combined: visionHf01, 
-    alt: "Vision-01 | Sure Shot-SS194" 
-  },
-  { 
-    uniform: vision02, 
-    fabric: visionSlide02, 
-    combined: visionHf02, 
-    alt: "Vision-02 | Big Boss-512" 
-  },
-  { 
-    uniform: vision03, 
-    fabric: visionSlide03, 
-    combined: visionHf03, 
-    alt: "Vision-03 | Big Boss-5128" 
-  },
-  { 
-    uniform: vision04, 
-    fabric: visionSlide04, 
-    combined: visionHf04, 
-    alt: "Vision-04 | Sure Shot-306" 
-  },
-  { 
-    uniform: vision05, 
-    fabric: visionSlide05, 
-    combined: visionHf05, 
-    alt: "Vision-05 | Big Boss-569" 
-  },
-  { 
-    uniform: vision06, 
-    fabric: visionSlide06, 
-    combined: visionHf06, 
-    alt: "Vision-06 | Big Boss-5128" 
-  },
-  { 
-    uniform: vision07, 
-    fabric: visionSlide07, 
-    combined: visionHf07, 
-    alt: "Vision-07 | Big Boss-525" 
-  },
-  { 
-    uniform: visionSlide08, 
-    fabric: visionSlide08, 
-    combined: visionHf08, 
-    alt: "Vision-08 | Big Boss-5111" 
-  },
-  { 
-    uniform: vision09, 
-    fabric: visionSlide09, 
-    combined: visionHf09, 
-    alt: "Vision-09 | Big Boss-567" 
-  },
-  { 
-    uniform: vision10, 
-    fabric: visionSlide10, 
-    combined: visionHf10, 
-    alt: "Vision-10 | Big Boss-5128" 
-  },
-];
 
 // Import Sport Wear (formerly Other) category images
 import other01 from "@/assets/products/other-01.png";
@@ -180,6 +109,8 @@ interface Product {
   name: string;
   image: string;
   humanImage?: string; // For products with human model images
+  fabricImage?: string; // For products with fabric images
+  combinedImage?: string; // For products with combined view
 }
 
 interface CategoryData {
@@ -240,15 +171,15 @@ const categoryData: Record<string, CategoryData> = {
     description: "Modern and contemporary fabric combinations for the new age schools. Innovative designs meeting today's requirements.",
     catalogPdf: "/catalogs/mafatlal-premium-combinations.pdf",
     products: [
-      { id: 1, name: "Vision-01 | Sure Shot-SS194", image: vision01 },
-      { id: 2, name: "Vision-02 | Big Boss-512", image: vision02 },
-      { id: 3, name: "Vision-03 | Big Boss-5128", image: vision03 },
-      { id: 4, name: "Vision-04 | Sure Shot-306", image: vision04 },
-      { id: 5, name: "Vision-05 | Big Boss-569", image: vision05 },
-      { id: 6, name: "Vision-06 | Big Boss-5128", image: vision06 },
-      { id: 7, name: "Vision-07 | Big Boss-525", image: vision07 },
-      { id: 8, name: "Vision-09 | Big Boss-567", image: vision09 },
-      { id: 9, name: "Vision-10 | Big Boss-5128", image: vision10 },
+      { id: 1, name: "Vision-01 | Sure Shot-SS194", image: vision01, humanImage: vision01, fabricImage: visionSlide01, combinedImage: visionHf01 },
+      { id: 2, name: "Vision-02 | Big Boss-512", image: vision02, humanImage: vision02, fabricImage: visionSlide02, combinedImage: visionHf02 },
+      { id: 3, name: "Vision-03 | Big Boss-5128", image: vision03, humanImage: vision03, fabricImage: visionSlide03, combinedImage: visionHf03 },
+      { id: 4, name: "Vision-04 | Sure Shot-306", image: vision04, humanImage: vision04, fabricImage: visionSlide04, combinedImage: visionHf04 },
+      { id: 5, name: "Vision-05 | Big Boss-569", image: vision05, humanImage: vision05, fabricImage: visionSlide05, combinedImage: visionHf05 },
+      { id: 6, name: "Vision-06 | Big Boss-5128", image: vision06, humanImage: vision06, fabricImage: visionSlide06, combinedImage: visionHf06 },
+      { id: 7, name: "Vision-07 | Big Boss-525", image: vision07, humanImage: vision07, fabricImage: visionSlide07, combinedImage: visionHf07 },
+      { id: 8, name: "Vision-09 | Big Boss-567", image: vision09, humanImage: vision09, fabricImage: visionSlide09, combinedImage: visionHf09 },
+      { id: 9, name: "Vision-10 | Big Boss-5128", image: vision10, humanImage: vision10, fabricImage: visionSlide10, combinedImage: visionHf10 },
     ],
   },
   "sport-wear": {
@@ -303,84 +234,8 @@ const categoryData: Record<string, CategoryData> = {
   },
 };
 
-// Vision Slide Card with toggle between uniform, fabric, and combined
-type VisionViewType = "uniform" | "fabric" | "combined";
 
-const VisionSlideCard = ({ 
-  image, 
-  index,
-  onImageClick 
-}: { 
-  image: typeof visionSlideImages[0]; 
-  index: number;
-  onImageClick: (imageSrc: string, imageAlt: string, images?: { src: string; alt: string }[]) => void;
-}) => {
-  const [currentView, setCurrentView] = useState<VisionViewType>("uniform");
-  
-  const viewLabels: Record<VisionViewType, string> = {
-    uniform: "Uniform",
-    fabric: "Fabric",
-    combined: "Uniform & Fabric"
-  };
-  
-  const views: VisionViewType[] = ["uniform", "fabric", "combined"];
-  
-  const getCurrentImage = () => {
-    switch (currentView) {
-      case "uniform": return image.uniform;
-      case "fabric": return image.fabric;
-      case "combined": return image.combined;
-    }
-  };
-
-  const handleClick = () => {
-    const images = [
-      { src: image.uniform, alt: `${image.alt} - Uniform` },
-      { src: image.fabric, alt: `${image.alt} - Fabric` },
-      { src: image.combined, alt: `${image.alt} - Uniform & Fabric` },
-    ];
-    const currentIdx = views.indexOf(currentView);
-    onImageClick(getCurrentImage(), `${image.alt} - ${viewLabels[currentView]}`, images);
-  };
-
-  const cycleView = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    const currentIdx = views.indexOf(currentView);
-    const nextIdx = (currentIdx + 1) % views.length;
-    setCurrentView(views[nextIdx]);
-  };
-
-  return (
-    <div 
-      className="bg-white rounded-xl shadow-lg overflow-hidden group cursor-pointer"
-      onClick={handleClick}
-    >
-      <div className="aspect-[3/4] overflow-hidden relative">
-        <img
-          src={getCurrentImage()}
-          alt={`${image.alt} - ${viewLabels[currentView]}`}
-          className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
-        />
-        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
-          <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm font-medium bg-black/50 px-3 py-1 rounded-full">
-            Click to view
-          </span>
-        </div>
-      </div>
-      <div className="p-3">
-        <p className="text-sm font-medium text-foreground truncate mb-2">{image.alt}</p>
-        <button
-          onClick={cycleView}
-          className="w-full text-xs bg-primary/10 hover:bg-primary/20 text-primary px-3 py-2 rounded-lg transition-colors font-medium"
-        >
-          View: {viewLabels[currentView]} →
-        </button>
-      </div>
-    </div>
-  );
-};
-
-// Product card with optional human/fabric flip
+// Product card with 3-image lightbox support (human, fabric, combined)
 const ProductCard = ({ 
   product, 
   index, 
@@ -390,15 +245,26 @@ const ProductCard = ({
   index: number; 
   onImageClick: (imageSrc: string, imageAlt: string, images?: { src: string; alt: string }[]) => void;
 }) => {
+  // Check if product has all 3 image types
+  const hasThreeViews = !!product.humanImage && !!product.fabricImage && !!product.combinedImage;
+  // Check if product has just human/fabric flip
+  const hasFlip = !!product.humanImage && !product.fabricImage;
+  
   const [showHuman, setShowHuman] = useState(!!product.humanImage);
-  const hasFlip = !!product.humanImage;
-
   const currentImage = showHuman && product.humanImage ? product.humanImage : product.image;
 
   const handleClick = () => {
     if (!product.image) return;
     
-    if (hasFlip) {
+    if (hasThreeViews) {
+      // For products with 3 views, pass all 3 images for lightbox with slide effect
+      const images = [
+        { src: product.humanImage!, alt: `${product.name} - Uniform View` },
+        { src: product.fabricImage!, alt: `${product.name} - Fabric View` },
+        { src: product.combinedImage!, alt: `${product.name} - Uniform & Fabric View` },
+      ];
+      onImageClick(product.humanImage!, `${product.name} - Uniform View`, images);
+    } else if (hasFlip) {
       // For flip cards, pass both images for lightbox navigation
       const images = [
         { src: product.humanImage!, alt: `${product.name} - Model View` },
@@ -427,7 +293,7 @@ const ProductCard = ({
             {/* Enhanced zoom overlay on hover */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
               <span className="text-white scale-90 group-hover:scale-100 opacity-0 group-hover:opacity-100 transition-all duration-300 text-sm font-medium bg-black/60 px-4 py-2 rounded-full backdrop-blur-sm">
-                🔍 Click to zoom
+                🔍 Click to view {hasThreeViews ? '3 images' : 'full size'}
               </span>
             </div>
           </>
@@ -446,6 +312,9 @@ const ProductCard = ({
         <h3 className="font-semibold text-lg text-foreground">
           {product.name}
         </h3>
+        {hasThreeViews && (
+          <p className="text-xs text-primary mt-1">Click to view 3 images with slide effect</p>
+        )}
         {hasFlip && (
           <button
             onClick={(e) => {
@@ -457,7 +326,7 @@ const ProductCard = ({
             {showHuman ? "View Fabric" : "View Model"}
           </button>
         )}
-        {product.image && !hasFlip && (
+        {product.image && !hasFlip && !hasThreeViews && (
           <p className="text-xs text-muted-foreground mt-1">Click to view full size</p>
         )}
       </div>
@@ -474,10 +343,6 @@ const ProductCategory = () => {
   const [lightboxImages, setLightboxImages] = useState<{ src: string; alt: string }[]>([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  // Autoplay plugin for carousel
-  const autoplayPlugin = useRef(
-    Autoplay({ delay: 3000, stopOnInteraction: true })
-  );
 
   const openLightbox = (imageSrc: string, imageAlt: string, images?: { src: string; alt: string }[]) => {
     if (imageSrc) {
@@ -534,45 +399,7 @@ const ProductCategory = () => {
         </div>
       </section>
 
-      {/* Vision Combination Slider - Only show for vision-combination category */}
-      {category === "vision-combination" && (
-        <section className="section-padding bg-secondary">
-          <div className="container-custom">
-            <h2 className="text-2xl font-display font-bold text-foreground mb-4 text-center">
-              Uniform Showcase
-            </h2>
-            <p className="text-center text-muted-foreground mb-8">
-              Click the button below each item to toggle between Uniform, Fabric, and Combined views
-            </p>
-            <div className="max-w-4xl mx-auto">
-              <Carousel
-                opts={{
-                  align: "start",
-                  loop: true,
-                }}
-                plugins={[autoplayPlugin.current]}
-                className="w-full"
-                onMouseEnter={autoplayPlugin.current.stop}
-                onMouseLeave={autoplayPlugin.current.reset}
-              >
-                <CarouselContent className="-ml-2 md:-ml-4">
-                  {visionSlideImages.map((image, index) => (
-                    <CarouselItem key={index} className="pl-2 md:pl-4 basis-full md:basis-1/2 lg:basis-1/3">
-                      <VisionSlideCard 
-                        image={image} 
-                        index={index}
-                        onImageClick={openLightbox}
-                      />
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-                <CarouselPrevious className="hidden md:flex -left-12" />
-                <CarouselNext className="hidden md:flex -right-12" />
-              </Carousel>
-            </div>
-          </div>
-        </section>
-      )}
+      {/* Removed Vision Combination Slider section - lightbox now shows 3 images directly */}
 
       {/* Products Grid - 3 columns x 3 rows */}
       <section className="section-padding">
