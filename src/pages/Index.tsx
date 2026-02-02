@@ -47,6 +47,21 @@ const productCategories = [
     description: "Modern designs meeting contemporary school requirements.",
     path: "/products/vision-combination",
   },
+  {
+    name: "Sport Wear",
+    description: "Quality athletic uniforms for school sports activities.",
+    path: "/products/sport-wear",
+  },
+  {
+    name: "Hospitality",
+    description: "Professional uniforms for hotels, restaurants and healthcare.",
+    path: "/products/hospitality",
+  },
+  {
+    name: "Other Products",
+    description: "Industrial, security and specialized uniform solutions.",
+    path: "/products/other-products",
+  },
 ];
 
 const Index = () => {

@@ -167,6 +167,13 @@ import hosp06 from "@/assets/products/hosp-06.png";
 import hosp07 from "@/assets/products/hosp-07.png";
 import hosp08 from "@/assets/products/hosp-08.png";
 import hosp09 from "@/assets/products/hosp-09.png";
+import hosp10 from "@/assets/products/hosp-10.png";
+import hosp11 from "@/assets/products/hosp-11.png";
+import hosp12 from "@/assets/products/hosp-12.png";
+import hosp13 from "@/assets/products/hosp-13.png";
+import hosp14 from "@/assets/products/hosp-14.png";
+import hosp15 from "@/assets/products/hosp-15.png";
+import hosp16 from "@/assets/products/hosp-16.png";
 
 interface Product {
   id: number;
@@ -261,22 +268,28 @@ const categoryData: Record<string, CategoryData> = {
   },
   "hospitality": {
     title: "Hospitality",
-    description: "Professional uniforms for the hospitality industry including hotels, restaurants, and corporate settings. Elegant designs with premium comfort.",
-    catalogPdf: "/catalogs/other-products.pdf",
+    description: "Professional uniforms for the hospitality industry including hotels, restaurants, healthcare and corporate settings. Elegant designs with premium comfort.",
+    catalogPdf: "/catalogs/hospitality-catalog.pdf",
     products: [
       { id: 1, name: "Chef White Uniform", image: hosp04 },
-      { id: 2, name: "Chef Black Uniform", image: hosp04 },
-      { id: 3, name: "Kitchen Apron Set", image: hosp05 },
-      { id: 4, name: "Hotel Staff Uniform - Olive", image: hosp06 },
-      { id: 5, name: "Formal Bandhgala - Navy", image: hosp07 },
-      { id: 6, name: "Formal Bandhgala - Charcoal", image: hosp08 },
-      { id: 7, name: "Executive Suit - Black", image: hosp09 },
+      { id: 2, name: "Kitchen Apron Set", image: hosp05 },
+      { id: 3, name: "Hotel Staff Uniform - Olive", image: hosp06 },
+      { id: 4, name: "Formal Bandhgala - Navy", image: hosp07 },
+      { id: 5, name: "Formal Bandhgala - Charcoal", image: hosp08 },
+      { id: 6, name: "Executive Suit - Black", image: hosp09 },
+      { id: 7, name: "Doctor Coat - White", image: hosp10 },
+      { id: 8, name: "Nurse Uniform - Pink", image: hosp11 },
+      { id: 9, name: "Medical Staff - Sky Blue", image: hosp12 },
+      { id: 10, name: "Nurse Uniform - Rose", image: hosp13 },
+      { id: 11, name: "Medical Scrubs - Purple", image: hosp14 },
+      { id: 12, name: "Medical Scrubs - Lavender", image: hosp15 },
+      { id: 13, name: "Doctor Uniform Set", image: hosp16 },
     ],
   },
   "other-products": {
     title: "Other Products",
     description: "Specialized uniforms for industrial, security, and professional sectors. Durable and functional designs for demanding work environments.",
-    catalogPdf: "/catalogs/other-products.pdf",
+    catalogPdf: "/catalogs/hospitality-catalog.pdf",
     products: [
       { id: 1, name: "Industrial Workwear - Navy Red", image: hosp01 },
       { id: 2, name: "Safety High-Vis Coverall", image: hosp02 },
