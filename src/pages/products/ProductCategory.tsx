@@ -33,6 +33,15 @@ import happy05 from "@/assets/products/happy-05.png";
 import happy06 from "@/assets/products/happy-06.png";
 import happy07 from "@/assets/products/happy-07.png";
 import happy08 from "@/assets/products/happy-08.png";
+import happy09 from "@/assets/products/happy-09.png";
+import happy10 from "@/assets/products/happy-10.png";
+import happy11 from "@/assets/products/happy-11.png";
+import happy12 from "@/assets/products/happy-12.png";
+import happy13 from "@/assets/products/happy-13.png";
+import happy14 from "@/assets/products/happy-14.png";
+import happy15 from "@/assets/products/happy-15.png";
+import happy16 from "@/assets/products/happy-16.png";
+import happy17 from "@/assets/products/happy-17.png";
 
 // Import Happy Days human model images
 import happyHuman01 from "@/assets/products/happy-human-01.png";
@@ -110,7 +119,8 @@ interface Product {
   image: string;
   humanImage?: string; // For products with human model images
   fabricImage?: string; // For products with fabric images
-  combinedImage?: string; // For products with combined view
+  combinedImage?: string; // For products with combined view (only for 3-image lightbox)
+  twoImageLightbox?: boolean; // For 2-image lightbox (Uniform, Fabric)
 }
 
 interface CategoryData {
@@ -141,14 +151,23 @@ const categoryData: Record<string, CategoryData> = {
     description: "Comfortable and colorful fabrics designed for everyday school wear. Easy to maintain and perfect for active students.",
     catalogPdf: "/catalogs/mafatlal-happy-days.pdf",
     products: [
-      { id: 1, name: "Vision-14 | Sure Shot-310", image: happy01, humanImage: happyHuman01, fabricImage: happy01, combinedImage: happyHuman01 },
-      { id: 2, name: "Vision-15 | Big Boss-5130", image: happy02, humanImage: happyHuman02, fabricImage: happy02, combinedImage: happyHuman02 },
-      { id: 3, name: "Vision-18 | Big Boss-5129", image: happy03, humanImage: happyHuman03, fabricImage: happy03, combinedImage: happyHuman03 },
-      { id: 4, name: "Vision-26 | Big Boss-579", image: happy04, humanImage: happyHuman04, fabricImage: happy04, combinedImage: happyHuman04 },
-      { id: 5, name: "Blaze-5 | Memory-913", image: happy05, humanImage: happy05, fabricImage: happy06, combinedImage: happy05 },
-      { id: 6, name: "Yellow & Grey Cricket Set", image: happy06, humanImage: happy06, fabricImage: happy05, combinedImage: happy06 },
-      { id: 7, name: "Pink & Black Doctor Set", image: happy07, humanImage: happy07, fabricImage: happy08, combinedImage: happy07 },
-      { id: 8, name: "Spark-10 | Ziba-1", image: happy08, humanImage: happy08, fabricImage: happy07, combinedImage: happy08 },
+      { id: 1, name: "Vision-14 | Sure Shot-310", image: happyHuman01, fabricImage: happy01, twoImageLightbox: true },
+      { id: 2, name: "Vision-15 | Big Boss-5130", image: happyHuman02, fabricImage: happy02, twoImageLightbox: true },
+      { id: 3, name: "Vision-18 | Big Boss-5129", image: happyHuman03, fabricImage: happy03, twoImageLightbox: true },
+      { id: 4, name: "Vision-26 | Big Boss-579", image: happyHuman04, fabricImage: happy04, twoImageLightbox: true },
+      { id: 5, name: "Blaze-5 | Memory-913", image: happy05, fabricImage: happy06, twoImageLightbox: true },
+      { id: 6, name: "Yellow & Grey Cricket Set", image: happy06, fabricImage: happy05, twoImageLightbox: true },
+      { id: 7, name: "Pink & Black Doctor Set", image: happy07, fabricImage: happy08, twoImageLightbox: true },
+      { id: 8, name: "Spark-10 | Ziba-1", image: happy08, fabricImage: happy07, twoImageLightbox: true },
+      { id: 9, name: "Navy Blue & Sky Uniform", image: happy09, fabricImage: happy01, twoImageLightbox: true },
+      { id: 10, name: "Green & Navy Combo", image: happy10, fabricImage: happy02, twoImageLightbox: true },
+      { id: 11, name: "Pink & Black Set", image: happy11, fabricImage: happy03, twoImageLightbox: true },
+      { id: 12, name: "Yellow & Grey Pinafore", image: happy12, fabricImage: happy04, twoImageLightbox: true },
+      { id: 13, name: "Orange & Navy Dungaree", image: happy13, fabricImage: happy05, twoImageLightbox: true },
+      { id: 14, name: "Grey Check Formal", image: happy14, fabricImage: happy06, twoImageLightbox: true },
+      { id: 15, name: "Purple Formal Set", image: happy15, fabricImage: happy07, twoImageLightbox: true },
+      { id: 16, name: "Pink & Blue Classic", image: happy16, fabricImage: happy08, twoImageLightbox: true },
+      { id: 17, name: "Light Blue Formal", image: happy17, fabricImage: happy01, twoImageLightbox: true },
     ],
   },
   "eco-earth": {
@@ -156,14 +175,14 @@ const categoryData: Record<string, CategoryData> = {
     description: "Sustainable and environmentally friendly uniform fabrics. Made with eco-conscious materials without compromising on quality.",
     catalogPdf: "/catalogs/eco-earth-mafatlal.pdf",
     products: [
-      { id: 1, name: "Oxygen 1-8 Blue Collection", image: eco01, humanImage: eco01, fabricImage: eco02, combinedImage: eco01 },
-      { id: 2, name: "Oxygen Blue Fabric", image: eco02, humanImage: eco02, fabricImage: eco01, combinedImage: eco02 },
-      { id: 3, name: "Oxygen 9-16 Grey Collection", image: eco03, humanImage: eco03, fabricImage: eco04, combinedImage: eco03 },
-      { id: 4, name: "Oxygen Grey Fabric", image: eco04, humanImage: eco04, fabricImage: eco03, combinedImage: eco04 },
-      { id: 5, name: "Oxygen 17-24 Pink Collection", image: eco05, humanImage: eco05, fabricImage: eco06, combinedImage: eco05 },
-      { id: 6, name: "Oxygen Pink Fabric", image: eco06, humanImage: eco06, fabricImage: eco05, combinedImage: eco06 },
-      { id: 7, name: "Oxygen 25-32 Purple Collection", image: eco07, humanImage: eco07, fabricImage: eco08, combinedImage: eco07 },
-      { id: 8, name: "Oxygen Purple Fabric", image: eco08, humanImage: eco08, fabricImage: eco07, combinedImage: eco08 },
+      { id: 1, name: "Oxygen 1-8 Blue Collection", image: eco01, fabricImage: eco02, twoImageLightbox: true },
+      { id: 2, name: "Oxygen Blue Fabric", image: eco02, fabricImage: eco01, twoImageLightbox: true },
+      { id: 3, name: "Oxygen 9-16 Grey Collection", image: eco03, fabricImage: eco04, twoImageLightbox: true },
+      { id: 4, name: "Oxygen Grey Fabric", image: eco04, fabricImage: eco03, twoImageLightbox: true },
+      { id: 5, name: "Oxygen 17-24 Pink Collection", image: eco05, fabricImage: eco06, twoImageLightbox: true },
+      { id: 6, name: "Oxygen Pink Fabric", image: eco06, fabricImage: eco05, twoImageLightbox: true },
+      { id: 7, name: "Oxygen 25-32 Purple Collection", image: eco07, fabricImage: eco08, twoImageLightbox: true },
+      { id: 8, name: "Oxygen Purple Fabric", image: eco08, fabricImage: eco07, twoImageLightbox: true },
     ],
   },
   "vision-combination": {
@@ -235,7 +254,7 @@ const categoryData: Record<string, CategoryData> = {
 };
 
 
-// Product card with 3-image lightbox support (human, fabric, combined)
+// Product card with lightbox support (2-image or 3-image)
 const ProductCard = ({ 
   product, 
   index, 
@@ -245,10 +264,12 @@ const ProductCard = ({
   index: number; 
   onImageClick: (imageSrc: string, imageAlt: string, images?: { src: string; alt: string }[]) => void;
 }) => {
+  // Check if product has 2-image lightbox (Uniform, Fabric)
+  const hasTwoViews = !!product.twoImageLightbox && !!product.fabricImage;
   // Check if product has all 3 image types
-  const hasThreeViews = !!product.humanImage && !!product.fabricImage && !!product.combinedImage;
+  const hasThreeViews = !!product.humanImage && !!product.fabricImage && !!product.combinedImage && !product.twoImageLightbox;
   // Check if product has just human/fabric flip
-  const hasFlip = !!product.humanImage && !product.fabricImage;
+  const hasFlip = !!product.humanImage && !product.fabricImage && !product.twoImageLightbox;
   
   const [showHuman, setShowHuman] = useState(!!product.humanImage);
   const currentImage = showHuman && product.humanImage ? product.humanImage : product.image;
@@ -256,7 +277,14 @@ const ProductCard = ({
   const handleClick = () => {
     if (!product.image) return;
     
-    if (hasThreeViews) {
+    if (hasTwoViews) {
+      // For products with 2 views, pass Uniform and Fabric images for lightbox with slide effect
+      const images = [
+        { src: product.image, alt: `${product.name} - Uniform View` },
+        { src: product.fabricImage!, alt: `${product.name} - Fabric View` },
+      ];
+      onImageClick(product.image, `${product.name} - Uniform View`, images);
+    } else if (hasThreeViews) {
       // For products with 3 views, pass all 3 images for lightbox with slide effect
       const images = [
         { src: product.humanImage!, alt: `${product.name} - Uniform View` },
@@ -276,6 +304,12 @@ const ProductCard = ({
     }
   };
 
+  const getViewCount = () => {
+    if (hasTwoViews) return 2;
+    if (hasThreeViews) return 3;
+    return 1;
+  };
+
   return (
     <div
       className={`card-product overflow-hidden animate-fade-in group ${product.image ? 'cursor-pointer' : ''}`}
@@ -293,7 +327,7 @@ const ProductCard = ({
             {/* Enhanced zoom overlay on hover */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
               <span className="text-white scale-90 group-hover:scale-100 opacity-0 group-hover:opacity-100 transition-all duration-300 text-sm font-medium bg-black/60 px-4 py-2 rounded-full backdrop-blur-sm">
-                🔍 Click to view {hasThreeViews ? '3 images' : 'full size'}
+                🔍 Click to view {getViewCount() > 1 ? `${getViewCount()} images` : 'full size'}
               </span>
             </div>
           </>
@@ -312,8 +346,8 @@ const ProductCard = ({
         <h3 className="font-semibold text-lg text-foreground">
           {product.name}
         </h3>
-        {hasThreeViews && (
-          <p className="text-xs text-primary mt-1">Click to view 3 images with slide effect</p>
+        {(hasTwoViews || hasThreeViews) && (
+          <p className="text-xs text-primary mt-1">Click to view {getViewCount()} images with slide effect</p>
         )}
         {hasFlip && (
           <button
@@ -326,7 +360,7 @@ const ProductCard = ({
             {showHuman ? "View Fabric" : "View Model"}
           </button>
         )}
-        {product.image && !hasFlip && !hasThreeViews && (
+        {product.image && !hasFlip && !hasThreeViews && !hasTwoViews && (
           <p className="text-xs text-muted-foreground mt-1">Click to view full size</p>
         )}
       </div>
