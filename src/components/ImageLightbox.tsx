@@ -34,7 +34,7 @@ const ImageLightbox = ({
       setTimeout(() => {
         onNavigate(currentIndex + 1);
         setIsAnimating(false);
-      }, 300);
+      }, 150);
     }
   }, [canGoNext, currentIndex, onNavigate, isAnimating]);
 
@@ -45,7 +45,7 @@ const ImageLightbox = ({
       setTimeout(() => {
         onNavigate(currentIndex - 1);
         setIsAnimating(false);
-      }, 300);
+      }, 150);
     }
   }, [canGoPrev, currentIndex, onNavigate, isAnimating]);
 

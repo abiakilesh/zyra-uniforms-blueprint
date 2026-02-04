@@ -208,7 +208,7 @@
   }
 
   .animate-slide-in-left {
-    animation: slideInLeft 0.3s ease-out forwards;
+    animation: slideInLeft 0.15s ease-out forwards;
   }
 
   @keyframes slideInLeft {
@@ -223,7 +223,7 @@
   }
 
   .animate-slide-in-right {
-    animation: slideInRight 0.3s ease-out forwards;
+    animation: slideInRight 0.15s ease-out forwards;
   }
 
   @keyframes slideInRight {
@@ -238,7 +238,7 @@
   }
 
   .animate-slide-out-left {
-    animation: slideOutLeft 0.3s ease-out forwards;
+    animation: slideOutLeft 0.15s ease-out forwards;
   }
 
   @keyframes slideOutLeft {
@@ -253,7 +253,7 @@
   }
 
   .animate-slide-out-right {
-    animation: slideOutRight 0.3s ease-out forwards;
+    animation: slideOutRight 0.15s ease-out forwards;
   }
 
   @keyframes slideOutRight {
