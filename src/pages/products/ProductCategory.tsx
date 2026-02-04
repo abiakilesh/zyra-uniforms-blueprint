@@ -21,6 +21,8 @@ import premiumHuman03 from "@/assets/products/premium-human-03.png";
 import premiumHuman04 from "@/assets/products/premium-human-04.png";
 import premiumHuman05 from "@/assets/products/premium-human-05.png";
 import premiumHuman06 from "@/assets/products/premium-human-06.png";
+import premiumHuman07 from "@/assets/products/premium-human-07.png";
+import premiumHuman08 from "@/assets/products/premium-human-08.png";
 
 // Import Premium Fabric images
 import premiumFabric01 from "@/assets/products/premium-fabric-01.png";
@@ -29,6 +31,8 @@ import premiumFabric03 from "@/assets/products/premium-fabric-03.png";
 import premiumFabric04 from "@/assets/products/premium-fabric-04.png";
 import premiumFabric05 from "@/assets/products/premium-fabric-05.png";
 import premiumFabric06 from "@/assets/products/premium-fabric-06.png";
+import premiumFabric07 from "@/assets/products/premium-fabric-07.png";
+import premiumFabric08 from "@/assets/products/premium-fabric-08.png";
 
 // Import Premium Combined images
 import premiumCombined01 from "@/assets/products/premium-combined-01.png";
@@ -37,6 +41,8 @@ import premiumCombined03 from "@/assets/products/premium-combined-03.png";
 import premiumCombined04 from "@/assets/products/premium-combined-04.png";
 import premiumCombined05 from "@/assets/products/premium-combined-05.png";
 import premiumCombined06 from "@/assets/products/premium-combined-06.png";
+import premiumCombined07 from "@/assets/products/premium-combined-07.png";
+import premiumCombined08 from "@/assets/products/premium-combined-08.png";
 
 // Import Eco Earth images
 import eco01 from "@/assets/products/eco-01.png";
@@ -166,10 +172,12 @@ const categoryData: Record<string, CategoryData> = {
       { id: 4, name: "P-113 | Big Boss-578", image: premiumHuman04, humanImage: premiumHuman04, fabricImage: premiumFabric04, combinedImage: premiumCombined04 },
       { id: 5, name: "P-116 | Big Boss-530", image: premiumHuman05, humanImage: premiumHuman05, fabricImage: premiumFabric05, combinedImage: premiumCombined05 },
       { id: 6, name: "P-119 | Big Boss-525", image: premiumHuman06, humanImage: premiumHuman06, fabricImage: premiumFabric06, combinedImage: premiumCombined06 },
-      { id: 7, name: "Taurus-6 | Memory-913", image: premium01, humanImage: premium01, fabricImage: premium02, combinedImage: premium01 },
-      { id: 8, name: "Bakooza-20 | 800025", image: premium03, humanImage: premium03, fabricImage: premium04, combinedImage: premium03 },
-      { id: 9, name: "Vision-05 | Big Boss-569", image: premium05, humanImage: premium05, fabricImage: premium06, combinedImage: premium05 },
-      { id: 10, name: "Vision-07 | Big Boss-525", image: premium07, humanImage: premium07, fabricImage: premium08, combinedImage: premium07 },
+      { id: 7, name: "P-127 | Big Boss-585", image: premiumHuman07, humanImage: premiumHuman07, fabricImage: premiumFabric07, combinedImage: premiumCombined07 },
+      { id: 8, name: "P-145 | Big Boss-503", image: premiumHuman08, humanImage: premiumHuman08, fabricImage: premiumFabric08, combinedImage: premiumCombined08 },
+      { id: 9, name: "Taurus-6 | Memory-913", image: premium01, humanImage: premium01, fabricImage: premium02, combinedImage: premium01 },
+      { id: 10, name: "Bakooza-20 | 800025", image: premium03, humanImage: premium03, fabricImage: premium04, combinedImage: premium03 },
+      { id: 11, name: "Vision-05 | Big Boss-569", image: premium05, humanImage: premium05, fabricImage: premium06, combinedImage: premium05 },
+      { id: 12, name: "Vision-07 | Big Boss-525", image: premium07, humanImage: premium07, fabricImage: premium08, combinedImage: premium07 },
     ],
   },
   "happy-days": {
