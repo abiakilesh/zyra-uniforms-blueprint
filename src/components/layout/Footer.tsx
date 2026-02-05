@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
-import logo from "@/assets/zyra-logo.png";
+import logoWhite from "@/assets/zyra-logo-white.png";
 
 const Footer = () => {
   return (
@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="space-y-4">
-            <img src={logo} alt="Zyra Uniforms" className="h-12" />
+            <img src={logoWhite} alt="Zyra Uniforms" className="h-12" />
             <p className="text-primary-foreground/80 text-sm leading-relaxed">
               Premium school uniform supplier in Tiruppur, Tamil Nadu. 
               Quality fabrics, trusted by schools across the region.
@@ -107,7 +107,7 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             {/* Logo in footer bottom */}
             <div className="flex items-center gap-4">
-              <img src={logo} alt="Zyra Uniforms" className="h-10" />
+              <img src={logoWhite} alt="Zyra Uniforms" className="h-10" />
               <p className="text-primary-foreground/60 text-sm">
                 © {new Date().getFullYear()} Zyra Uniforms. All rights reserved.
               </p>
